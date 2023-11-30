@@ -24,7 +24,7 @@ def deposit_ui():
 
     if account_name in accounts:
         amount = float(input("Enter Deposit Amount: "))
-        if(input("Input Category? Y/N") == "Y"):
+        if(input("Input Category? Y/N: ") == "Y"):
             catBool = True
         else:
             catBool = False
@@ -50,7 +50,7 @@ def withdraw_ui():
             print("Invalid Withdraw Amount!\n")
             return
 
-        if(input("Input Category? Y/N") == "Y"):
+        if(input("Input Category? Y/N: ") == "Y"):
             catBool = True
         else:
             catBool = False
@@ -67,7 +67,18 @@ def withdraw_ui():
         print("Account Not Found!\n")
 
 def transfer_ui():
-    pass
+    print("Transferring From \n")
+    print("----------------------")
+    transfer_from = input("Account Name: ")
+    amount = float(input("Enter Amount to Transfer: "))
+    print("Transferring To \n")
+    print("----------------------")
+    transfer_to = input("Account Name: ")
+
+    if (transfer_from in accounts) and (transfer_to in accounts):
+        accounts[transfer_from].transfer(amount, accounts[transfer_to])
+    else:
+        print("Invalid Account Name!")
 
 def current_balance():
     account_name = input("Enter Account Name: ")

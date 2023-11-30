@@ -29,6 +29,14 @@ class Account:
             print(f"Amount ${amount} withdrawn successfully.")
         else:
             print("Insufficient Funds...")
+
+    def transfer(self, amount, to_account):
+        if amount <= self.balance:
+            self.balance -= amount
+            to_account.balance += amount
+            print(f"Amount ${amount} transferred successfully.")
+        else:
+            print("Insufficient Funds...")
     
     # Print balance
     def get_balance(self):
