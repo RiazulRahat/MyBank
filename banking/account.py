@@ -13,13 +13,13 @@ class Account:
         self.transaction_log = TransactionLog()
 
     # deposit amount to account
-    def deposit(self, amount, category = "Other"):
+    def deposit(self, amount, category = "Income"):
         self.balance += amount
         depTran = Transaction(amount, "Deposit", category)    # add transaction to cluster
         self.transaction_log.add_transaction(depTran)   # add transaction to transactionLog
 
     # withdraw amount from account
-    def withdraw(self, amount, category = "Other"):
+    def withdraw(self, amount, category = "General"):
         # check if withdrawing more than funds available
         if amount <= self.balance:
             self.balance -= amount
