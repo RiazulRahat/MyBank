@@ -14,9 +14,9 @@ def main():
 
 
     account2.withdraw(100)
-    account2.deposit(200)
+    account2.deposit(200, "Income")
     account2.withdraw(66)
-    account2.deposit(128)
+    account2.deposit(128, "Side Hustle")
 
     print(account2.get_balance())
 
