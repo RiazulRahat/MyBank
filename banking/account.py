@@ -32,5 +32,5 @@ class Account:
     def get_balance(self):
         return self.balance
     
-    def get_transactions(self):
-        return self.transaction_log.get_transactions()
+    def get_transactions(self, category = "None"):
+        return self.transaction_log.get_transactions(category)

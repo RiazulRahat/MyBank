@@ -14,13 +14,14 @@ def main():
 
 
     account2.withdraw(100)
-    account2.deposit(200, "Income")
+    account2.deposit(200, "Selling")
+    account2.deposit(129)
     account2.withdraw(66)
     account2.deposit(128, "Side Hustle")
 
     print(account2.get_balance())
 
-    print(account2.get_transactions())
+    print(account2.get_transactions("Side Hustle"))
     print(account.get_transactions())
 
     
