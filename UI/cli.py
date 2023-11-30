@@ -2,6 +2,8 @@
 
 from banking.account import Account
 
+accounts = {}
+
 def create_account_ui():
     print("Create New Account")
     print("---------------------")
@@ -11,24 +13,74 @@ def create_account_ui():
 
     new_account = Account(account_name, initial_deposit)
 
+    accounts[account_name] = new_account
+
     print(f"Account created successfully! \nAccount Name: {account_name}\nInitial balance: {initial_deposit}\n")
 
-    return new_account
 
 
 def deposit_ui():
-    pass
+    account_name = input("Enter Account Name: ")
+
+    if account_name in accounts:
+        amount = float(input("Enter Deposit Amount: "))
+        if(input("Input Category? Y/N") == "Y"):
+            catBool = True
+        else:
+            catBool = False
+        
+
+        if catBool == True:
+            category = input("Category: ")
+        else:
+            category = "Income"
+        
+        accounts[account_name].deposit(amount, category)
+        print(f"Amount ${amount} deposited successfully.")
+    else:
+        print("Account Not Found!\n")
+
 
 def withdraw_ui():
-    pass
+    account_name = input("Enter Account Name: ")
+
+    if account_name in accounts:
+        amount = float(input("Enter Withdraw Amount: "))
+        if(amount <= 0):
+            print("Invalid Withdraw Amount!\n")
+            return
+
+        if(input("Input Category? Y/N") == "Y"):
+            catBool = True
+        else:
+            catBool = False
+        
+
+        if catBool == True:
+            category = input("Category: ")
+        else:
+            category = "General"
+        
+        accounts[account_name].withdraw(amount, category)
+        #print(f"Amount ${amount} deposited successfully.")
+    else:
+        print("Account Not Found!\n")
 
 def transfer_ui():
     pass
 
+def current_balance():
+    account_name = input("Enter Account Name: ")
+
+    if account_name in accounts:
+        balance = accounts[account_name].get_balance()
+        print(f"Current Balance = ${balance}")
+    else:
+        print("Invalid Account!")
 
 def main_menu():
     while True:
-        print("1: Create Account \n2: Deposit \n3: Withdraw \n4: Transfer \n5: Exit \n")
+        print("1: Create Account \n2: Deposit \n3: Withdraw \n4: Transfer \n5: Current Balance \n6: Exit")
         choice = int(input("Enter your choice: "))
 
         if(choice == 1):
@@ -40,6 +92,8 @@ def main_menu():
         elif(choice == 4):
             transfer_ui()
         elif(choice == 5):
+            current_balance()
+        elif(choice == 6):
             break
         else:
             print("Invalid choice!")

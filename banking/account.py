@@ -26,6 +26,7 @@ class Account:
             self.balance -= amount
             witTran = Transaction(amount, "Withdraw", category)   # add transaction to cluster
             self.transaction_log.add_transaction(witTran)   # add transaction to transactionLog
+            print(f"Amount ${amount} withdrawn successfully.")
         else:
             print("Insufficient Funds...")
     
