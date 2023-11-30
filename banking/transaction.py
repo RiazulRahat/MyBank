@@ -24,3 +24,6 @@ class Transaction:
     # returns string "amount tranType date" for storage
     def serialize(self):
         return f"{self.amount} {self.tranType} {self.category} {self.date}"
+    
+    def get_category(self):
+        return self.category
