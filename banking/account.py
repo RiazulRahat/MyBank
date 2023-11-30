@@ -34,6 +34,8 @@ class Account:
         if amount <= self.balance:
             self.balance -= amount
             to_account.balance += amount
+            self.transaction_log.add_transaction(Transaction(amount, "Transfer In", "Transfer"))
+            to_account.transaction_log.add_transaction(Transaction(amount, "Transfer Out", "Transfer"))
             print(f"Amount ${amount} transferred successfully.")
         else:
             print("Insufficient Funds...")

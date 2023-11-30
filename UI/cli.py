@@ -89,9 +89,16 @@ def current_balance():
     else:
         print("Invalid Account!")
 
+def get_all_transactions():
+    account_name = input("Enter Account Name: ")
+    if account_name in accounts:
+        print("\n" + accounts[account_name].get_transactions())
+    else:
+        print("Invalid Account!")
+
 def main_menu():
     while True:
-        print("1: Create Account \n2: Deposit \n3: Withdraw \n4: Transfer \n5: Current Balance \n6: Exit")
+        print("1: Create Account \n2: Deposit \n3: Withdraw \n4: Transfer \n5: Current Balance \n6: Show all transactions \n7: Exit")
         choice = int(input("Enter your choice: "))
 
         if(choice == 1):
@@ -105,6 +112,8 @@ def main_menu():
         elif(choice == 5):
             current_balance()
         elif(choice == 6):
+            get_all_transactions()
+        elif(choice == 7):
             break
         else:
             print("Invalid choice!")

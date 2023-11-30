@@ -18,7 +18,7 @@ class Transaction:
 
 
     def is_Valid(self):
-        return self.amount > 0 and self.tranType in ["Deposit", "Withdraw", "Transfer"]
+        return self.amount > 0 and self.tranType in ["Deposit", "Withdraw", "Transfer In", "Transfer Out"]
     
 
     # returns string "amount tranType date" for storage
