@@ -8,8 +8,9 @@ from .transaction import Transaction
 class Account:
 
     # initializer
-    def __init__(self):
-        self.balance = 0
+    def __init__(self, account_name, deposit = 0.0):
+        self.account_name = account_name
+        self.balance = deposit
         self.transaction_log = TransactionLog()
 
     # deposit amount to account

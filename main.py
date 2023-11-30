@@ -1,28 +1,10 @@
 # interact with Account class and handle user input/output
 
 from banking.account import Account
+from UI.cli import main_menu
 
 def main():
-    account = Account() # create an account
-    account2 = Account()
-
-    account.deposit(100)
-    print(f"Balance: {account.get_balance()}")
-
-    account.withdraw(50)
-    print(f"Balance: {account.get_balance()}")
-
-
-    account2.withdraw(100)
-    account2.deposit(200, "Selling")
-    account2.deposit(129)
-    account2.withdraw(66)
-    account2.deposit(128, "Side Hustle")
-
-    print(account2.get_balance())
-
-    print(account2.get_transactions("Side Hustle"))
-    print(account.get_transactions())
+    main_menu()
 
     
 
