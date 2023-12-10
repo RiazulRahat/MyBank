@@ -1,4 +1,4 @@
-# Comman-Line UI
+# Command-Line UI
 
 from banking.account import Account
 
@@ -118,4 +118,9 @@ def main_menu():
         else:
             print("Invalid choice!")
 
-        
+
+def login_screen():
+    print("Log In To Your Account \n")
+    print("--------------------------")
+
+    account_name
