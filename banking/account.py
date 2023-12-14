@@ -22,6 +22,7 @@ class Account:
         self.account_name = account_name    # Necessary parameter
         self.balance = deposit
         self.transaction_log = TransactionLog() # Account's Transaction Log
+        self.transaction_log.add_transaction(Transaction(deposit, "Deposit", "Initial Deposit"))
 
     #---------------------------------------------------------------------------------#
     ### DEPOSIT ###

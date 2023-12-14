@@ -19,11 +19,9 @@ def create_account_ui():
 
     return account_name
 
-
-
 def deposit_ui(account_name):
     amount = float(input("Enter Deposit Amount: "))
-    if(input("Input Category? Y/N: ").capitalize() == "Y"):
+    if(input("Input Category? Y/N: ") == "Y"):
         category = input("Category: ")
     else:
         category = "Income"
@@ -96,8 +94,6 @@ def main_menu(account_name):
         else:
             print("Invalid choice!")
 
-
-
 # Make this the [default UI] - then this account name gets passed to every functions
 def login_screen():
     print("Log In To Your Account \n")
@@ -116,9 +112,6 @@ def login_screen():
             main_menu(account_name)
         else:
             exit()
-
-
-
 
 
 def verifyAccount(account_name):
