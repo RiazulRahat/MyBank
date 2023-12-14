@@ -17,110 +17,116 @@ def create_account_ui():
 
     print(f"Account created successfully! \nAccount Name: {account_name}\nInitial balance: {initial_deposit}\n")
 
+    return account_name
 
 
-def deposit_ui():
-    account_name = input("Enter Account Name: ")
 
-    if account_name in accounts:
-        amount = float(input("Enter Deposit Amount: "))
-        if(input("Input Category? Y/N: ") == "Y"):
-            catBool = True
-        else:
-            catBool = False
-        
-
-        if catBool == True:
-            category = input("Category: ")
-        else:
-            category = "Income"
-        
-        accounts[account_name].deposit(amount, category)
-        print(f"Amount ${amount} deposited successfully.")
+def deposit_ui(account_name):
+    amount = float(input("Enter Deposit Amount: "))
+    if(input("Input Category? Y/N: ").capitalize() == "Y"):
+        category = input("Category: ")
     else:
-        print("Account Not Found!\n")
+        category = "Income"
 
+    accounts[account_name].deposit(amount, category)
+    print(f"Amount ${amount} deposited successfully.")
 
-def withdraw_ui():
-    account_name = input("Enter Account Name: ")
+def withdraw_ui(account_name):
 
-    if account_name in accounts:
-        amount = float(input("Enter Withdraw Amount: "))
-        if(amount <= 0):
-            print("Invalid Withdraw Amount!\n")
-            return
+    amount = float(input("Enter Withdraw Amount: "))
+    if(amount <= 0):
+        print("Invalid Withdraw Amount!\n")
+        return
 
-        if(input("Input Category? Y/N: ") == "Y"):
-            catBool = True
-        else:
-            catBool = False
-        
-
-        if catBool == True:
-            category = input("Category: ")
-        else:
-            category = "General"
-        
-        accounts[account_name].withdraw(amount, category)
-        #print(f"Amount ${amount} deposited successfully.")
+    if(input("Input Category? Y/N: ") == "Y"):
+        catBool = True
     else:
-        print("Account Not Found!\n")
+        catBool = False
+        
 
-def transfer_ui():
+    if catBool == True:
+        category = input("Category: ")
+    else:
+        category = "General"
+        
+    accounts[account_name].withdraw(amount, category)
+    print(f"Amount ${amount} withdrawn successfully.")
+
+def transfer_ui(transfer_from):
     print("Transferring From \n")
     print("----------------------")
-    transfer_from = input("Account Name: ")
+    print(f"Account Name: {transfer_from}")
     amount = float(input("Enter Amount to Transfer: "))
     print("Transferring To \n")
     print("----------------------")
     transfer_to = input("Account Name: ")
 
-    if (transfer_from in accounts) and (transfer_to in accounts):
+    if verifyAccount(transfer_to):
         accounts[transfer_from].transfer(amount, accounts[transfer_to])
     else:
-        print("Invalid Account Name!")
+        print("Invalid Account to Transfer!")
 
-def current_balance():
-    account_name = input("Enter Account Name: ")
+def current_balance(account_name):
+    balance = accounts[account_name].get_balance()
+    print(f"Current Balance = ${balance}")
 
-    if account_name in accounts:
-        balance = accounts[account_name].get_balance()
-        print(f"Current Balance = ${balance}")
-    else:
-        print("Invalid Account!")
+def get_all_transactions(account_name):
+    print("\n" + accounts[account_name].get_transactions())
 
-def get_all_transactions():
-    account_name = input("Enter Account Name: ")
-    if account_name in accounts:
-        print("\n" + accounts[account_name].get_transactions())
-    else:
-        print("Invalid Account!")
-
-def main_menu():
-    while True:
-        print("1: Create Account \n2: Deposit \n3: Withdraw \n4: Transfer \n5: Current Balance \n6: Show all transactions \n7: Exit")
+def main_menu(account_name):
+    while verifyAccount(account_name):
+        print(f"Account Name: {account_name}\n1: Deposit \n2: Withdraw \n3: Transfer \n4: Current Balance \n5: Show all transactions \n6: Switch Accounts \n7: Log Out")
         choice = int(input("Enter your choice: "))
 
         if(choice == 1):
-            create_account_ui()
+            deposit_ui(account_name)
         elif(choice == 2):
-            deposit_ui()
+            withdraw_ui(account_name)
         elif(choice == 3):
-            withdraw_ui()
+            transfer_ui(account_name)
         elif(choice == 4):
-            transfer_ui()
+            current_balance(account_name)
         elif(choice == 5):
-            current_balance()
+            get_all_transactions(account_name)
         elif(choice == 6):
-            get_all_transactions()
+            login_screen()
         elif(choice == 7):
+            exit()
             break
         else:
             print("Invalid choice!")
 
 
+
+# Make this the [default UI] - then this account name gets passed to every functions
 def login_screen():
     print("Log In To Your Account \n")
     print("--------------------------")
 
-    account_name
+    #Add password definitions later#
+
+    account_name = input("Enter your Account Name: ")
+    if(verifyAccount(account_name)):
+        main_menu(account_name)
+    
+    else:
+        print("Account not Found! \n")
+        if(input("Register New Account? Y/N : ") == "Y"):
+            account_name = create_account_ui()
+            main_menu(account_name)
+        else:
+            exit()
+
+
+
+
+
+def verifyAccount(account_name):
+    if account_name in accounts:
+        return True
+    
+    return False
+
+
+def exit():
+    print("\n\n\nThank you for using MyBank!\n\n\n")

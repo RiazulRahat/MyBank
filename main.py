@@ -1,10 +1,10 @@
 # interact with Account class and handle user input/output
 
 from banking.account import Account
-from UI.cli import main_menu
+from UI.cli import login_screen
 
 def main():
-    main_menu()
+    login_screen()
 
     
 
