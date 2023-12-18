@@ -87,31 +87,33 @@ def main_menu(account_name):
         elif(choice == 5):
             get_all_transactions(account_name)
         elif(choice == 6):
-            login_screen()
+            return "switch"
         elif(choice == 7):
-            exit()
-            break
+            return "logout"
         else:
             print("Invalid choice!")
 
 # Make this the [default UI] - then this account name gets passed to every functions
 def login_screen():
-    print("Log In To Your Account \n")
-    print("--------------------------")
+    while True:
+        print("Log In To Your Account \n")
+        print("--------------------------")
 
-    #Add password definitions later#
+        #Add password definitions later#
 
-    account_name = input("Enter your Account Name: ")
-    if(verifyAccount(account_name)):
-        main_menu(account_name)
+        account_name = input("Enter your Account Name: ")
+        if(verifyAccount(account_name)):
+            action = main_menu(account_name)
+            if (action == "logout"):
+                break
     
-    else:
-        print("Account not Found! \n")
-        if(input("Register New Account? Y/N : ") == "Y"):
-            account_name = create_account_ui()
-            main_menu(account_name)
         else:
-            exit()
+            print("Account not Found! \n")
+            if(input("Register New Account? Y/N : ") == "Y"):
+                account_name = create_account_ui()
+                main_menu(account_name)
+            else:
+                exit()
 
 
 def verifyAccount(account_name):
