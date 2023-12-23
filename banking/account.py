@@ -39,7 +39,7 @@ class Account:
 
     def withdraw(self, amount, category = "General"):
         # CHECK if balance available to Withdraw
-        if amount <= self.balance:  # TRUE
+        if amount <= self.balance and (amount > 0):  # TRUE
             self.balance -= amount  # SUBTRACT withdraw amount
             witTran = Transaction(amount, "Withdraw", category)   # CREATE new Transaction
             self.transaction_log.add_transaction(witTran)   # ADD Transaction to TransactionLog

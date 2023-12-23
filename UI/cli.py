@@ -72,7 +72,7 @@ def current_balance(account_name):
 def get_all_transactions(account_name):
     print(text_center("TRANSACTION HISTORY"))
     print(accounts[account_name].get_transactions())
-    current_balance()
+    current_balance(account_name)
 
 def main_menu(account_name):
     while verifyAccount(account_name):
@@ -151,3 +151,10 @@ def text_top(text):
 
 def end_print():
     print("--------------------------")
+
+
+def check_negative(number):
+    if number <= 0:
+        return False
+    
+    return True
